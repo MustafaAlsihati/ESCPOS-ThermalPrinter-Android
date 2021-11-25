@@ -52,12 +52,12 @@ public abstract class DeviceConnection {
         }
         try {
             this.outputStream.write(this.data);
-            this.outputStream.flush();
-            this.data = new byte[0];
-            int waitingTime = addWaitingTime + (int) Math.floor(this.data.length / 16f);
+            int waitingTime = addWaitingTime + (int) Math.floor(this.data.length / 90f);
             if(waitingTime > 0) {
                 Thread.sleep(waitingTime);
             }
+            this.data = new byte[0];
+            this.outputStream.flush();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             throw new EscPosConnectionException(e.getMessage());
